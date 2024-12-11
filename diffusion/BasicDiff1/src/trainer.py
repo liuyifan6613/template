@@ -44,9 +44,10 @@ class Trainer:
             output_channels=out_channels,
             n_channels=config.MODEL_CHANNELS,
             ch_mults=config.CHANNEL_MULT,
-            n_blocks=config.NUM_RESBLOCKS
+            n_blocks=config.NUM_RESBLOCKS,
+            INITIAL_PREDICTOR=config.INITIAL_PREDICTOR,
         ).to(self.device)
-        self.diffusion = GaussianDiffusion(self.network.denoiser, config.TIMESTEPS, self.schedule, config.INITIAL_PREDICTOR).to(self.device)
+        self.diffusion = GaussianDiffusion(self.network.denoiser, config.TIMESTEPS, self.schedule).to(self.device)
         self.test_img_save_path = config.TEST_IMG_SAVE_PATH
         if not os.path.exists(self.test_img_save_path):
             os.makedirs(self.test_img_save_path)
