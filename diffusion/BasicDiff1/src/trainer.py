@@ -199,10 +199,16 @@ class Trainer:
                                                                                 t, self.diffusion)
                 if self.pre_ori:
                     if self.high_low_freq:
-                        residual_high = self.high_filter(gt.to(self.device) - init_predict)
-                        ddpm_loss = 2*self.loss(self.high_filter(noise_pred), residual_high) + self.loss(noise_pred, gt.to(self.device) - init_predict)
+                        if self.INITIAL_PREDICTOR:
+                            residual_high = self.high_filter(gt.to(self.device) - init_predict)
+                            ddpm_loss = 2*self.loss(self.high_filter(noise_pred), residual_high) + self.loss(noise_pred, gt.to(self.device) - init_predict)
+                        else:
+                            ddpm_loss = self.loss(noise_pred, gt.to(self.device))
                     else:
-                        ddpm_loss = self.loss(noise_pred, gt.to(self.device) - init_predict)
+                        if self.INITIAL_PREDICTOR:
+                            ddpm_loss = self.loss(noise_pred, gt.to(self.device) - init_predict)
+                        else:
+                            ddpm_loss = self.loss(noise_pred, gt.to(self.device))
                 else:
                     ddpm_loss = self.loss(noise_pred, noise_ref.to(self.device))
                 if self.high_low_freq:
@@ -225,9 +231,9 @@ class Trainer:
                     img_save = torch.cat([img, gt, init_predict.cpu()], dim=3)
                     if self.pre_ori:
                         if self.high_low_freq:
-                            img_save = torch.cat([img, gt, init_predict.cpu(), noise_pred.cpu() + self.high_filter(init_predict).cpu(), noise_pred.cpu() + init_predict.cpu()], dim=3)
+                            img_save = torch.cat([img, gt,   noise_pred.cpu() ], dim=3)
                         else:
-                            img_save = torch.cat([img, gt, init_predict.cpu(), noise_pred.cpu() + init_predict.cpu()], dim=3)
+                            img_save = torch.cat([img, gt,   noise_pred.cpu() ], dim=3)
                     save_image(img_save, os.path.join(
                         save_img_path, f"{iteration}.png"), nrow=4)
                 iteration += 1
@@ -240,8 +246,9 @@ class Trainer:
                     print('Saving models')
                     if not os.path.exists(self.weight_save_path):
                         os.makedirs(self.weight_save_path)
-                    torch.save(self.network.init_predictor.state_dict(),
-                               os.path.join(self.weight_save_path, f'model_init_{iteration}.pth'))
+                    if self.INITIAL_PREDICTOR:
+                        torch.save(self.network.init_predictor.state_dict(),
+                                os.path.join(self.weight_save_path, f'model_init_{iteration}.pth'))
                     torch.save(self.network.denoiser.state_dict(),
                                os.path.join(self.weight_save_path, f'model_denoiser_{iteration}.pth'))
                     if self.EMA_or_not:
