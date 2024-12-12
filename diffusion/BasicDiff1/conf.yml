@@ -9,7 +9,7 @@ NUM_RESBLOCKS : 1         # number of residual blocks
 CHANNEL_MULT : [1,2,3,4]  # channel multiplier of each layer
 NUM_HEADS : 1
 
-MODE : 1                    # 1 Train, 0 Test
+MODE : 1                  # 1 Train, 0 Test
 PRE_ORI : True            # if True, predict $x_0$, else predict $\epsilon$.
 INITIAL_PREDICTOR: False  # if False, train and test without the initial predictor.
 
