@@ -25,7 +25,7 @@ LOSS : 'L2'               # L1 or L2
 EMA_EVERY : 100           # update EMA every EMA_EVERY iterations
 START_EMA : 2000          # start EMA after START_EMA iterations
 SAVE_MODEL_EVERY : 10000  # save model every SAVE_MODEL_EVERY iterations
-EMA: True                 # if True, use EMA
+EMA: False                # if True, use EMA
 CONTINUE_TRAINING : False                 # if True, continue training
 CONTINUE_TRAINING_STEPS : 10000           # continue training from CONTINUE_TRAINING_STEPS
 PRETRAINED_PATH_INITIAL_PREDICTOR : ''    # path of pretrained initial predictor
