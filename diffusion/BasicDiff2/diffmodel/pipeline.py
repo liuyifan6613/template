@@ -19,7 +19,7 @@ from .utils.common import (
     make_tiled_fn,
     VRAMPeakMonitor,
 )
-from .model import ControlLDM, Diffusion, RRDBNet
+from .model import ControlLDM, Diffusion
 
 
 def resize_short_edge_to(imgs: torch.Tensor, size: int) -> torch.Tensor:
