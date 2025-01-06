@@ -6,4 +6,7 @@ CUDA_VISIBLE_DEVICES=0 python -u inference.py \
 --cfg_scale 8 \
 --noise_aug 0 \
 --input ./img \
---output ./out 
+--output ./out \
+--sampler spaced \
+--steps 50 \
+--cfg_scale 1.0
