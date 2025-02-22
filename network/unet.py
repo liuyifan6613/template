@@ -510,10 +510,10 @@ class Trainer:
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument('--train_img', type=str,
-                        default='/home/yfliu/Thesis_Work/deblur/deblur/selected_data/train_img')
-    parser.add_argument('--train_gt', type=str, default='。/train_gt')
-    parser.add_argument('--test_img', type=str, default='。/test_img')
-    parser.add_argument('--test_gt', type=str, default='。/test_gt')
+                        default='./train_img')
+    parser.add_argument('--train_gt', type=str, default='./train_gt')
+    parser.add_argument('--test_img', type=str, default='./test_img')
+    parser.add_argument('--test_gt', type=str, default='./test_gt')
     parser.add_argument('--checkpoint', type=str, default='。/model.pth')
     parser.add_argument('--train_image_size', type=int, default=512)
     parser.add_argument('--continue_training_epochs', type=int, default=0)
@@ -529,9 +529,9 @@ def main():
     parser.add_argument('--channel_out', type=int, default=3)
     parser.add_argument('--model_channels', type=int, default=32)
 
-    parser.add_argument('--test_img_save_path', type=str, default='。/test')
-    parser.add_argument('--weight_save_path', type=str, default='。/checkpoint')
-    parser.add_argument('--work_dir', type=str, default='。/Training')
+    parser.add_argument('--test_img_save_path', type=str, default='./test')
+    parser.add_argument('--weight_save_path', type=str, default='./checkpoint')
+    parser.add_argument('--work_dir', type=str, default='./Training')
 
     args = parser.parse_args()
     mode = args.mode
