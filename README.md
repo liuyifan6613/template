@@ -9,3 +9,6 @@ BasicDiff2: ControlNet通用框架，基于DiffBIR-V2.1改动实现，保留超�
 
 # Network
 UNet: U-Net模型的单卡训练以及推理代码。
+
+# Utils
+mgpus: 多卡训练与推理框架。
