@@ -376,7 +376,7 @@ class Simple3to3CNN(nn.Module):
     def forward(self, x):
         return self.net(x)
 
-def train():
+def main():
     parser = argparse.ArgumentParser(description="Simple example of training script.")
     parser.add_argument('--train_img', type=str, default='/home/yfliu/Dataset/set14/',
                         help='Training image.')
@@ -485,4 +485,4 @@ def train():
         test_function(args, model, test_dataset)
 
 if __name__ == "__main__":
-    train()
+    main()
