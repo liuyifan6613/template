@@ -469,7 +469,7 @@ def main():
     )
     parser.add_argument(
         "--test",
-        type=bool,
+        type=str,
         default=False,
         help="Train or test.",
     )
@@ -477,7 +477,7 @@ def main():
 
     model = Simple3to3CNN()
     test_dataset = BasicData(args.test_img, args.test_img, args.image_size)
-    if not args.test:
+    if args.test=='False':
         train_dataset = BasicData(args.train_img, args.train_gt, args.image_size)
         loss = torch.nn.MSELoss()
         training_function(args, model, train_dataset, test_dataset, loss)
