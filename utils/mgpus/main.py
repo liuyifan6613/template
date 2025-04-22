@@ -265,7 +265,7 @@ def training_function(args, model, train_dataset, eval_dataset, loss_function):
                         accelerator.save_state(output_dir.replace(f'model_{epoch}', 'best'))
             # Use accelerator.print to print only on the main process.
             accelerator.print(f"epoch: {epoch}| PSNR: {best_psnr:.2f}| Loss: {total_loss.item() / len(train_dataloader):.5f}|")
-        if args.with_tracking:
+        if args.with_tracking and accelerator.is_main_process:
             accelerator.log(
                 {
                     "train_loss": total_loss.item() / len(train_dataloader),
