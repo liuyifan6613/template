@@ -120,6 +120,10 @@ class Degradation():
         self.kernel2 = data['kernel2'].to(self.device)
         self.sinc_kernel = data['sinc_kernel'].to(self.device)
 
+        self.kernel1 = self.kernel1.repeat(gt.shape[0], 1, 1)
+        self.kernel2 = self.kernel2.repeat(gt.shape[0], 1, 1)
+        self.sinc_kernel = self.sinc_kernel.repeat(gt.shape[0], 1, 1)
+
         ori_h, ori_w = self.gt.size()[2:4]
 
         # ----------------------- The first degradation process ----------------------- #
@@ -276,7 +280,7 @@ class Degradation():
         kernel = torch.FloatTensor(kernel)
         kernel2 = torch.FloatTensor(kernel2)
 
-        return_d = {'kernel1': kernel, 'kernel2': kernel2, 'sinc_kernel': sinc_kernel}
+        return_d = {'kernel1': kernel.unsqueeze(0), 'kernel2': kernel2.unsqueeze(0), 'sinc_kernel': sinc_kernel.unsqueeze(0)}
         return return_d
 
 if __name__ == '__main__':
