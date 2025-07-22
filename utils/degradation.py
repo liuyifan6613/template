@@ -114,6 +114,7 @@ class Degradation():
         # training data synthesis
         data = self.get_kernel()
         self.gt = gt.to(self.device)
+        self.gt, _ = paired_random_crop(self.gt, self.gt, self.opt['gt_size']*2, 1)
         self.gt_usm = self.usm_sharpener(self.gt)
 
         self.kernel1 = data['kernel1'].to(self.device)
